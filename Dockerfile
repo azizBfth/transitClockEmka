@@ -58,11 +58,11 @@ RUN mkdir /usr/local/transitclock/test/config
 
 WORKDIR /usr/local/transitclock
 
-RUN  curl -s https://api.github.com/repos/TheTransitClock/transitime/releases/latest | jq -r ".assets[].browser_download_url" | grep 'Core.jar\|api.war\|web.war' | xargs -L1 wget
+#RUN  curl -s https://api.github.com/repos/TheTransitClock/transitime/releases/latest | jq -r ".assets[].browser_download_url" | grep 'Core.jar\|api.war\|web.war' | xargs -L1 wget
 
-#ADD transitime/transitclockWebapp/target/web.war /usr/local/transitclock/
-#ADD transitime/transitclockApi/target/api.war /usr/local/transitclock/
-#ADD transitime/transitclock/target/Core.jar /usr/local/transitclock/
+ADD ./jarfiles/web.war /usr/local/transitclock/
+ADD ./jarfiles/api.war /usr/local/transitclock/
+ADD ./jarfiles/Core.jar /usr/local/transitclock/
 
 # Deploy API which talks to core using RMI calls.
 RUN mv api.war  /usr/local/tomcat/webapps
